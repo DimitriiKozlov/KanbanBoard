@@ -10,6 +10,8 @@ namespace KanbanBoard.Models
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public Guid StateId { get; set; }
+
+        public Guid? StateId { get; set; }
+        public virtual State State { get; set; }
     }
 }
