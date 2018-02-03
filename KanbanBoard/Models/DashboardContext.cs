@@ -14,12 +14,14 @@ namespace KanbanBoard.Models
         {
             //Database.EnsureDeleted();
             Database.EnsureCreated();
-            //Database.EnsureCreated();
-            States.Add(new State { Name = "ToDo", Priority = 0 });
-            States.Add(new State { Name = "InProgress", Priority = 1 });
-            States.Add(new State { Name = "Done", Priority = 2 });
+            //States.Add(new State { Name = "ToDo" });
+            //States.Add(new State { Name = "InProgress" });
+            //States.Add(new State { Name = "Done" });
 
-            Cards.Add(new Card {Title = "BugFix", Description = "Fix som bug", StatePriority = 0});
+            //Cards.Add(new Card { Title = "BugFix", Description = "Fix som bug", StatePriority = 0 });
+
+            //SaveChanges();
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
