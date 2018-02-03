@@ -47,7 +47,7 @@ namespace KanbanBoard.Controllers
         // GET: Dashboard/Create
         public IActionResult Create()
         {
-            ViewData["StateId"] = new SelectList(_context.States, "Id", "Id");
+            ViewData["StatePriority"] = new SelectList(_context.States, "Priority", "Name");
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace KanbanBoard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,StateId")] Card card)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,StatePriority")] Card card)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace KanbanBoard.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StateId"] = new SelectList(_context.States, "Id", "Id", card.StateId);
+            ViewData["StatePriority"] = new SelectList(_context.States, "Priority", "Name", card.StatePriority);
             return View(card);
         }
 
@@ -82,7 +82,7 @@ namespace KanbanBoard.Controllers
             {
                 return NotFound();
             }
-            ViewData["StateId"] = new SelectList(_context.States, "Id", "Id", card.StateId);
+            ViewData["StatePriority"] = new SelectList(_context.States, "Priority", "Name", card.StatePriority);
             return View(card);
         }
 
@@ -91,7 +91,7 @@ namespace KanbanBoard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Description,StateId")] Card card)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Description,StatePriority")] Card card)
         {
             if (id != card.Id)
             {
@@ -118,7 +118,7 @@ namespace KanbanBoard.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StateId"] = new SelectList(_context.States, "Id", "Id", card.StateId);
+            ViewData["StatePriority"] = new SelectList(_context.States, "Priority", "Name", card.StatePriority);
             return View(card);
         }
 
