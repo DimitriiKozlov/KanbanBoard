@@ -8,8 +8,8 @@ namespace KanbanBoard.Models
         public DbSet<State> States { get; set; }
         public DashboardContext(DbContextOptions<DashboardContext> options) : base(options)
         {
-            //Database.EnsureDeleted();
-            Database.EnsureCreated();
+            Database.EnsureDeleted();
+            //Database.EnsureCreated();
             //States.Add(new State { Name = "ToDo" });
             //States.Add(new State { Name = "InProgress" });
             //States.Add(new State { Name = "Done" });

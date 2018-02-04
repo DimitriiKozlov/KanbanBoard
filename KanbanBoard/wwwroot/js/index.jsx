@@ -31,16 +31,18 @@
     }
     render() {
         if (this.state.isUpdated) {
-            return <div className={this.state.data.state.name}>
+            return <div className={this.state.data.state.name + " col-md-3"}>
                 <p><b><input type="text"
                     value={this.state.updateTitle}
                     onChange={this.onTitleChange} /></b></p>
                 <p><b><input type="text"
                     value={this.state.updateDescription}
                     onChange={this.onDescriptionChange} /></b></p>
-                <p><button onClick={this.onClickDelete}>Delete</button></p>
-                <p><button onClick={this.onClickSave}>Save</button></p>
-                <p><button onClick={this.onClickChangeStatus}>=></button></p>
+                   
+                    <button onClick={this.onClickDelete}>Delete</button>
+                    <button onClick={this.onClickSave}>Save</button>
+                    <button onClick={this.onClickChangeStatus}>=></button>
+                    
             </div>;
         }
         if (this.state.data.state.name == "Done") {
@@ -51,12 +53,12 @@
                    </div>;
 
         }
-        return <div className={this.state.data.state.name + " col-md-3"}>
-            <p><b>{this.state.data.title}</b></p>
-            <p>{this.state.data.description}</p>
-            <p><button onClick={this.onClickDelete}>Delete</button></p>
-            <p><button onClick={this.onClickUpdate}>Update</button></p>
-            <p><button onClick={this.onClickChangeStatus}>=></button></p>
+        return <div className={this.state.data.state.name + " card"}>
+            <div className="card-header">{this.state.data.title}</div>
+               <div class="card-body">{this.state.data.description}</div>
+            <p><button onClick={this.onClickDelete}>Delete</button>
+            <button onClick={this.onClickUpdate}>Update</button>
+            <button onClick={this.onClickChangeStatus}>=></button></p>
         </div>;
     }
 }
