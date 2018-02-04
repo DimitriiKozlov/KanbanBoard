@@ -9,7 +9,7 @@
         this.props.onRemove(this.state.data);
     }
     render() {
-        return <div>
+        return <div className={this.state.data.state.name}>
             <p><b>{this.state.data.title}</b></p>
             <p>{this.state.data.description}</p>
             <p><button onClick={this.onClick}>Delete</button></p>
@@ -124,13 +124,18 @@ class TaskDashboard extends React.Component {
     render() {
 ////<PhoneForm onPhoneSubmit={this.onAddPhone} />
         var remove = this.onRemoveCard;
-        return <div>
-            <h2>Dashboard</h2>
-            <div>
+        return <div className="dashboard">
+            <h1>Dashboard</h1>
+            <ul>
+                <li>To Do</li>
+                <li>In Progress</li>
+                <li>Done</li>
+            </ul>
+            <div className="taskList">
                 {
                     this.state.card.map(function (card) {
 
-                        return <TaskCard key={card.id} card={card} onRemove={remove} />
+                        return <TaskCard key={card.id} card={card} onRemove={remove}/>;
                     })
                 }
             </div>
