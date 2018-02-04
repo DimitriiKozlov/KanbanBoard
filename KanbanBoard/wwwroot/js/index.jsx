@@ -38,7 +38,7 @@
                 <p><button onClick={this.onClickSave}>Save</button></p>
             </div>;
         }
-        return <div className={this.state.data.state.name}>'
+        return <div className={this.state.data.state.name}>
             <p><b>{this.state.data.title}</b></p>
             <p>{this.state.data.description}</p>
             <p><button onClick={this.onClickDelete}>Delete</button></p>
