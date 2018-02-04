@@ -1,51 +1,5 @@
-﻿@model IEnumerable<KanbanBoard.Models.Card>
-
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 <div id="content"></div>
-<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
-<script src="~/js/app.jsx"></script>
-
-@*<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            To Do
-        </th>
-        <th>
-            In Progress
-        </th>
-        <th>
-            Done
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <div id="cards">
-        @foreach (var item in Model)
-    {
-        <script type="text/babel">
-            class TaskCard extends React.Componet {
-                render() {
-                    return
-                        <div className={this.props.class}>
-                            <p><h2>{this.props.title}</h2></p>
-                            <p><h3>{this.props.description}</h3></p>
-                        </div>;
-                }
-            }
-            ReactDOM.render(
-            <TaskCard title="@item.Title" description="@item.Description" class="@item.State.Name"></TaskCard>,
-            document.getElementById("cards"))
-        </script>
-}
-    </div>
-</table>*@
+<script src="~/js/index.jsx"></script>

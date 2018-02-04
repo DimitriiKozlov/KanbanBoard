@@ -79,6 +79,16 @@ namespace KanbanBoard.Controllers
         //    return View(card);
         //}
 
+        [HttpPost]
+        public IActionResult PostCard([FromBody]Card card)
+        {
+            card.Id = Guid.NewGuid();
+            card.State = _context.States.FirstOrDefault(s => s.Name == "ToDo");
+            _context.Add(card);
+            _context.SaveChanges();
+            return Ok(card);
+        }
+
         // GET: Dashboard/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
@@ -151,15 +161,16 @@ namespace KanbanBoard.Controllers
         //    return View(card);
         //}
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(Guid? id)
+        [HttpDelete]
+        public IActionResult DeleteCard(string id)
         {
-            var card = _context.Cards.SingleOrDefault(m => m.Id == id);
+            var card = _context.Cards.SingleOrDefault(m => m.Id == new Guid(id));
             if (card == null)
             {
                 return NotFound();
             }
             _context.Cards.Remove(card);
+            _context.SaveChanges();
             return Ok(card);
         }
 
