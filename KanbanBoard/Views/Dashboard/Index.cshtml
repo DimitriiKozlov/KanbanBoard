@@ -3,45 +3,49 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div id="content"></div>
+<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+<script src="~/js/app.jsx"></script>
 
-<h2>Index</h2>
+@*<h2>Index</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            To Do
+        </th>
+        <th>
+            In Progress
+        </th>
+        <th>
+            Done
+        </th>
+        <th></th>
+    </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+    <div id="cards">
+        @foreach (var item in Model)
+    {
+        <script type="text/babel">
+            class TaskCard extends React.Componet {
+                render() {
+                    return
+                        <div className={this.props.class}>
+                            <p><h2>{this.props.title}</h2></p>
+                            <p><h3>{this.props.description}</h3></p>
+                        </div>;
+                }
+            }
+            ReactDOM.render(
+            <TaskCard title="@item.Title" description="@item.Description" class="@item.State.Name"></TaskCard>,
+            document.getElementById("cards"))
+        </script>
 }
-    </tbody>
-</table>
+    </div>
+</table>*@
