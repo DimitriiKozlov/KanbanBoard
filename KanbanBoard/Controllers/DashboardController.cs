@@ -89,8 +89,27 @@ namespace KanbanBoard.Controllers
             return Ok(card);
         }
 
-        // GET: Dashboard/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        [HttpPost]
+        public IActionResult UpdateCard([FromBody]Card uCard)
+        {
+            
+            try
+            {
+                //_context.Cards.Update(card);
+                var card = _context.Cards.FirstOrDefault(c => c.Id == uCard.Id);
+                card.Title = uCard.Title;
+                card.Description = uCard.Description;
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
+            return Ok(uCard);
+        }
+
+            // GET: Dashboard/Edit/5
+            public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
