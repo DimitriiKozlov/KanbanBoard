@@ -10,8 +10,8 @@
     }
     render() {
         return <div>
-            <p><b>{this.state.data.name}</b></p>
-            <p>{this.state.data.title}</p>
+            <p><b>{this.state.data.title}</b></p>
+            <p>{this.state.data.description}</p>
             <p><button onClick={this.onClick}>Delete</button></p>
         </div>;
     }
