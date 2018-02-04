@@ -98,7 +98,7 @@ namespace KanbanBoard.Controllers
             try
             {
                 //_context.Cards.Update(card);
-                
+
                 card.Title = uCard.Title;
                 card.Description = uCard.Description;
                 _context.SaveChanges();
@@ -111,8 +111,23 @@ namespace KanbanBoard.Controllers
             return Ok(dashboardContext.FirstOrDefault(c => c.Id == uCard.Id));
         }
 
-            // GET: Dashboard/Edit/5
-            public async Task<IActionResult> Edit(Guid? id)
+        [HttpGet]
+        public IActionResult ChangeStatusCard(Guid id)
+        {
+            var card = _context.Cards.Include(c => c.State).SingleOrDefault(m => m.Id == id);
+            if (card == null)
+            {
+                return NotFound();
+            }
+            card.State = _context.States.FirstOrDefault(s => s.Priority == card.State.Priority + 1);
+            _context.SaveChanges();
+
+            var dashboardContext = _context.Cards.Include(c => c.State);
+            return Ok(dashboardContext.FirstOrDefault(c => c.Id == card.Id));
+        }
+
+        // GET: Dashboard/Edit/5
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
