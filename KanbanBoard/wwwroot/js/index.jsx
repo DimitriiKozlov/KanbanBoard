@@ -73,6 +73,7 @@ class TaskDashboard extends React.Component {
 
         this.onAddCard = this.onAddCard.bind(this);
         this.onRemoveCard = this.onRemoveCard.bind(this);
+        this.onUpdateCard = this.onUpdateCard.bind(this);
     }
     // загрузка данных
     loadData() {
@@ -121,6 +122,22 @@ class TaskDashboard extends React.Component {
             xhr.send();
         }
     }
+	
+	onUpdateCard(card) {
+		if (card) {
+			var data = JSON.stringify({ "id": card.id "title": card.title, "description": card.description });
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("update", this.props.apiUrl + "/updatecard", true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onload = function () {
+               if (xhr.status == 200) {
+                   
+               }
+            }.bind(this);
+            xhr.send(data);
+		}
+	}
     //<CardForm onCardSubmit={this.onAddCard} />
     render() {
         var remove = this.onRemoveCard;
