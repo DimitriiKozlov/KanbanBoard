@@ -27,7 +27,7 @@
     }
     render() {
         if (this.state.isUpdated) {
-            return <div className={this.state.data.state.name}>'
+            return <div className={this.state.data.state.name}>
                 <p><b><input type="text"
                     value={this.state.updateTitle}
                     onChange={this.onTitleChange} /></b></p>
