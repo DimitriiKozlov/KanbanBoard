@@ -17,7 +17,7 @@
     }
     onClickSave(e) {
         this.setState({ isUpdated: false })
-        this.props.onUpdate(this.state.data.id, this.state.updateTitle, this.state.updateDescription);
+        this.props.onUpdate(this.state.data.id, this.state.updateTitle, this.state.updateDescription, this);
     }
     onTitleChange(e) {
         this.setState({ updateTitle: e.target.value });
@@ -88,7 +88,7 @@ class TaskDashboard extends React.Component {
         }
     }
 
-    onUpdateCard(id, uTitle, uDescription) {
+    onUpdateCard(id, uTitle, uDescription, context) {
         var data = JSON.stringify({ "id": id, "title": uTitle, "description": uDescription });
         var xhr = new XMLHttpRequest();
 
@@ -96,7 +96,8 @@ class TaskDashboard extends React.Component {
         xhr.setRequestHeader("Content-type", "application/json");
         xhr.onload = function () {
             if (xhr.status == 200) {
-                this.loadData();
+                var data = JSON.parse(xhr.responseText);
+                context.setState({ data: data });
             }
         }.bind(this);
         xhr.send(data);

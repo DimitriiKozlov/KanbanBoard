@@ -92,11 +92,13 @@ namespace KanbanBoard.Controllers
         [HttpPost]
         public IActionResult UpdateCard([FromBody]Card uCard)
         {
-            
+            var card = _context.Cards.FirstOrDefault(c => c.Id == uCard.Id);
+            if (card == null)
+                return NotFound();
             try
             {
                 //_context.Cards.Update(card);
-                var card = _context.Cards.FirstOrDefault(c => c.Id == uCard.Id);
+                
                 card.Title = uCard.Title;
                 card.Description = uCard.Description;
                 _context.SaveChanges();
@@ -105,7 +107,8 @@ namespace KanbanBoard.Controllers
             {
                 return NotFound();
             }
-            return Ok(uCard);
+            var dashboardContext = _context.Cards.Include(c => c.State);
+            return Ok(dashboardContext.FirstOrDefault(c => c.Id == uCard.Id));
         }
 
             // GET: Dashboard/Edit/5
