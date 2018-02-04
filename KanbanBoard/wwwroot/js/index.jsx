@@ -88,23 +88,6 @@ class TaskDashboard extends React.Component {
     componentDidMount() {
         this.loadData();
     }
-    // добавление объекта
-    onAddCard(card) {
-        if (card) {
-
-            var data = JSON.stringify({ "title": card.title, "description": card.description });
-            var xhr = new XMLHttpRequest();
-
-            xhr.open("post", this.props.apiUrl + "/postcard", true);
-            xhr.setRequestHeader("Content-type", "application/json");
-            xhr.onload = function () {
-                if (xhr.status == 200) {
-                    this.loadData();
-                }
-            }.bind(this);
-            xhr.send(data);
-        }
-    }
     // удаление объекта
     onRemoveCard(card) {
 
