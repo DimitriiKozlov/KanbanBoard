@@ -3,15 +3,8 @@
     border-style: solid;
     width: 250px;
     margin-top: 15px;
-    /*display: inline-block;*/
-    /*column-break-inside: avoid;*/
 }
 
 .dashboard li {
     list-style-type: none;
-    /*font-size: 40px;*/
-}
-
-.footer {
-    /*float: right;*/
 }

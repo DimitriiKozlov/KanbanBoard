@@ -1,5 +1,3 @@
-using System;
-
 namespace KanbanBoard.Models
 {
     public class ErrorViewModel

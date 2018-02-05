@@ -16,30 +16,30 @@
     }
     onSubmit(e) {
         e.preventDefault();
-        var CardTitle = this.state.title.trim();
-        var CardDescription = this.state.description;
-        if (!CardTitle || !CardDescription) {
+        var cardTitle = this.state.title.trim();
+        var cardDescription = this.state.description;
+        if (!cardTitle || !cardDescription) {
             return;
         }
-        this.props.onCardSubmit({ title: CardTitle, description: CardDescription });
+        this.props.onCardSubmit({ title: cardTitle, description: cardDescription });
         this.setState({ title: "", description: "" });
     }
     render() {
         return (
             <form className="form-control-lg " onSubmit={this.onSubmit}>
-                <p class="form-group align-items-center">
-                    <input class="form-text" type="text"
+                <p className="form-group align-items-center">
+                    <input className="form-text" type="text"
                         placeholder="Title"
                         value={this.state.title}
                         onChange={this.onTitleChange} />
                 </p>
-                <p class="form-group align-items-center">
-                    <input class="form-text" type="text"
+                <p className="form-group align-items-center">
+                    <input className="form-text" type="text"
                         placeholder="Description"
                         value={this.state.description}
                         onChange={this.onDescriptionChange} />
                 </p>
-                <input class="btn btn-success " type="submit" value="Add" />
+                <input className="btn btn-success " type="submit" value="Add" />
             </form>
         );
     }
@@ -60,20 +60,14 @@ class TaskDashboard extends React.Component {
 
             xhr.open("post", this.props.apiUrl + "/postcard", true);
             xhr.setRequestHeader("Content-type", "application/json");
-            //xhr.onload = function () {
-            //    if (xhr.status == 200) {
-            //        this.context.router.push(this.props.apiUrl);
-            //    }
-            //}.bind(this);
             xhr.send(data);
         }
     }
     render() {
-        var remove = this.onRemoveCard;
-        return <div className="cardForm">
+        return <div>
             <h1 className="display-1 text-center text-capitalize">Create Task</h1>
             <CardForm onCardSubmit={this.onAddCard} />
-            <a class="badge badge-primary" href={this.props.apiUrl}><h6>Go to Dashboard</h6></a>
+            <a className="badge badge-primary" href={this.props.apiUrl}><h6>Go to Dashboard</h6></a>
         </div>;
     }
 }
