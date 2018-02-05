@@ -61,7 +61,7 @@
             return <div className={this.state.data.state.name + " "}>
                        <div className="card-header text-center">
                            <div className="btn-group-justified" role="group">
-                        <button className="btn btn-outline-light text-right" onClick={this.onClickChangeStatus}>=></button>
+                        <button className="btn btn-outline-light text-right" onClick={this.onClickDelete}>Delete</button>
                            </div>
                        </div>
                        <h5 className="card-title text-center">{this.state.data.title}</h5>
@@ -96,7 +96,6 @@ class TaskDashboard extends React.Component {
         this.onUpdateCard = this.onUpdateCard.bind(this);
         this.onChangeStatus = this.onChangeStatus.bind(this);
     }
-    // загрузка данных
     loadData() {
         var xhr = new XMLHttpRequest();
         xhr.open("get", this.props.apiUrl + "/getall", true);
@@ -109,7 +108,6 @@ class TaskDashboard extends React.Component {
     componentDidMount() {
         this.loadData();
     }
-    // удаление объекта
     onRemoveCard(card) {
 
         if (card) {

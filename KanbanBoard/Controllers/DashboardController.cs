@@ -17,6 +17,15 @@ namespace KanbanBoard.Controllers
         public DashboardController(DashboardContext context)
         {
             _context = context;
+            if (_context.States.ToList().Any())
+            {
+                return;
+            }
+
+            _context.States.Add(new State {Name = "ToDo"});
+            _context.States.Add(new State {Name = "InProgress"});
+            _context.States.Add(new State {Name = "Done"});
+            _context.SaveChanges();
         }
 
         //GET: Dashboard

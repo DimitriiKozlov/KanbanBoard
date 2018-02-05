@@ -14,12 +14,5 @@ namespace KanbanBoard.Models
         [Required]
         public string Name { get; set; }
 
-        //public virtual ICollection<Card> Cards { get; set; }
-
-
-        //public State()
-        //{
-        //    Cards = new List<Card>();
-        //}
     }
 }
