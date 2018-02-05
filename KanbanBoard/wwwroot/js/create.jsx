@@ -26,20 +26,20 @@
     }
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
-                <p>
-                    <input type="text"
+            <form className="form-control-lg " onSubmit={this.onSubmit}>
+                <p class="form-group align-items-center">
+                    <input class="form-text" type="text"
                         placeholder="Title"
                         value={this.state.title}
                         onChange={this.onTitleChange} />
                 </p>
-                <p>
-                    <input type="text"
+                <p class="form-group align-items-center">
+                    <input class="form-text" type="text"
                         placeholder="Description"
                         value={this.state.description}
                         onChange={this.onDescriptionChange} />
                 </p>
-                <input type="submit" value="Add" />
+                <input class="btn btn-success " type="submit" value="Add" />
             </form>
         );
     }
@@ -71,9 +71,9 @@ class TaskDashboard extends React.Component {
     render() {
         var remove = this.onRemoveCard;
         return <div className="cardForm">
-            <h1>Create Task</h1>
+            <h1 className="display-1 text-center text-capitalize">Create Task</h1>
             <CardForm onCardSubmit={this.onAddCard} />
-            <a href={this.props.apiUrl}>Go to Dashboard</a>
+            <a class="badge badge-primary" href={this.props.apiUrl}><h6>Go to Dashboard</h6></a>
         </div>;
     }
 }

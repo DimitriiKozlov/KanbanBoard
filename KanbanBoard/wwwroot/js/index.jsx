@@ -2,7 +2,15 @@
 
     constructor(props) {
         super(props);
-        this.state = { data: props.card, isUpdated: false, updateTitle: props.card.title, updateDescription: props.card.description };
+        this.state = {
+            data: props.card,
+            isUpdated: false,
+            updateTitle: props.card.title,
+            updateDescription: props.card.description,
+            //tdCard: props.card.filter(c => c.state.name == "ToDo"),
+            //ipCard: props.card.filter(c => c.state.name == "InProgress"),
+            //dnCard: props.card.filter(c => c.state.name == "Done"),
+        };
         this.onClickDelete = this.onClickDelete.bind(this);
         this.onClickUpdate = this.onClickUpdate.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
@@ -31,34 +39,48 @@
     }
     render() {
         if (this.state.isUpdated) {
-            return <div className={this.state.data.state.name + " col-md-3"}>
-                <p><b><input type="text"
-                    value={this.state.updateTitle}
-                    onChange={this.onTitleChange} /></b></p>
-                <p><b><input type="text"
-                    value={this.state.updateDescription}
-                    onChange={this.onDescriptionChange} /></b></p>
-                   
-                    <button onClick={this.onClickDelete}>Delete</button>
-                    <button onClick={this.onClickSave}>Save</button>
-                    <button onClick={this.onClickChangeStatus}>=></button>
-                    
-            </div>;
+            return <div className={this.state.data.state.name + " "}>
+                       <div className="card-header text-center">
+                           <div className="btn-group-justified" role="group">
+                        <button className="btn btn-outline-light" onClick={this.onClickDelete}>Delete</button>
+                        <button className="btn btn-outline-light" onClick={this.onClickSave}>Save</button>
+                               <button className="btn btn-outline-light" onClick={this.onClickChangeStatus}>=></button>
+                           </div>
+                       </div>
+                       <div className="card-body text-center">
+                    <input class="input-group-text bg-secondary text-white" type="text"
+                                  value={this.state.updateTitle}
+                                  onChange={this.onTitleChange} />
+                    <input class="input-group-text bg-secondary text-white" type="text" type="text"
+                                  value={this.state.updateDescription}
+                                  onChange={this.onDescriptionChange} />
+                        </div>
+                   </div>;
         }
         if (this.state.data.state.name == "Done") {
-            return <div className={this.state.data.state.name + " col-md-3"}>
-                       <p><b>{this.state.data.title}</b></p>
-                       <p>{this.state.data.description}</p>
-                       <p><button onClick={this.onClickDelete}>Delete</button></p>
+            return <div className={this.state.data.state.name + " "}>
+                       <div className="card-header text-center">
+                           <div className="btn-group-justified" role="group">
+                        <button className="btn btn-outline-light text-right" onClick={this.onClickChangeStatus}>=></button>
+                           </div>
+                       </div>
+                       <h5 className="card-title text-center">{this.state.data.title}</h5>
+                       <div className="card-body">{this.state.data.description}
+                       </div>
                    </div>;
 
         }
-        return <div className={this.state.data.state.name + " card"}>
-            <div className="card-header">{this.state.data.title}</div>
-               <div class="card-body">{this.state.data.description}</div>
-            <p><button onClick={this.onClickDelete}>Delete</button>
-            <button onClick={this.onClickUpdate}>Update</button>
-            <button onClick={this.onClickChangeStatus}>=></button></p>
+        return <div className={this.state.data.state.name + " "}>
+            <div className="card-header text-center">
+                <div className="btn-group-justified" role="group">
+                    <button className="btn btn-outline-light  " onClick={this.onClickDelete}>Delete</button>
+                    <button className="btn btn-outline-light  " onClick={this.onClickUpdate}>Update</button>
+                    <button className="btn btn-outline-light  " onClick={this.onClickChangeStatus}>=></button>
+                </div>
+            </div>
+            <h5 className="card-title text-center">{this.state.data.title}</h5>
+            <div className="card-body">{this.state.data.description}
+            </div>
         </div>;
     }
 }
@@ -130,6 +152,8 @@ class TaskDashboard extends React.Component {
             if (xhr.status == 200) {
                 var data = JSON.parse(xhr.responseText);
                 context.setState({ data: data });
+                this.loadData();
+                this.render();
             }
         }.bind(this);
         //xhr.send(data);
@@ -141,23 +165,46 @@ class TaskDashboard extends React.Component {
         var update = this.onUpdateCard;
         var changeStatus = this.onChangeStatus;
         return <div className="dashboard">
-            <h1>Dashboard</h1>
-            <a href={this.props.apiUrl + "/create"}>Add task</a>
+            <h1 className="display-1 text-center text-capitalize">Dashboard</h1>
+            <a class="badge badge-primary" href={this.props.apiUrl + "/create"}><h2>Add task</h2></a>
 
-            <ul>
-                <li className="col-md-4">To Do</li>
-                <li className="col-md-4">In Progress</li>
-                <li className="col-md-4">Done</li>
+            <ul className="row display-4">
+                <li className="col-md-4 text-center ">To Do</li>
+                <li className="col-md-4 text-center">In Progress</li>
+                <li className="col-md-4 text-center">Done</li>
             </ul>
-            <div className="taskList">
-                {
-                    this.state.card.map(function (card) {
-
-                        return <TaskCard key={card.id} card={card} onRemove={remove} onUpdate={update} onChangeStatus={changeStatus}/>;
-                    })
-                }
+            <div className="row">
+                <div className="col-3 offset-1">
+                    {
+                        this.state.card.map(function (card) {
+                            if (card.state.name == "ToDo")
+                                return <div className="card text-white bg-danger"><TaskCard className="" key={card.id} card={card} onRemove={remove} onUpdate={update} onChangeStatus={changeStatus} />
+                                </div>
+                        })
+                    }
+                </div>
+                <div className="col-3 offset-1">
+                    {
+                        this.state.card.map(function (card) {
+                            if (card.state.name == "InProgress")
+                                return <div className="card text-white bg-warning "><TaskCard className="" key={card.id
+                                } card={card} onRemove={remove} onUpdate={update} onChangeStatus={changeStatus} />
+                                </div>
+                        })
+                    }
+                </div>
+                <div className="col-3 offset-1">
+                    {
+                        this.state.card.map(function (card) {
+                            if (card.state.name == "Done")
+                                return <div className="card text-white bg-success "><TaskCard className="" key={card.id
+                                } card={card} onRemove={remove} onUpdate={update} onChangeStatus={changeStatus} />
+                                </div>
+                        })
+                    }
+                </div>
             </div>
-        </div>;
+            </div>;
     }
 }
 

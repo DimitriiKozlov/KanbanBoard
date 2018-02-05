@@ -1,9 +1,10 @@
-﻿.taskList div {
-    border-width: 1px;
+﻿.card {
+    border-width: 5px;
     border-style: solid;
-    display: block;
-    margin: 30px;
-    padding: 20px;
+    width: 250px;
+    margin-top: 15px;
+    /*display: inline-block;*/
+    /*column-break-inside: avoid;*/
 }
 
 .dashboard li {
@@ -11,14 +12,6 @@
     /*font-size: 40px;*/
 }
 
-.ToDo {
-    background-color: red;
-}
-
-.InProgress {
-    background-color: yellow;
-}
-
-.Done {
-    background-color: green;
+.footer {
+    /*float: right;*/
 }
