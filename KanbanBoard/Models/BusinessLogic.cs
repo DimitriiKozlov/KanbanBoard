@@ -7,7 +7,7 @@ namespace KanbanBoard.Models
 {
     public class BusinessLogic
     {
-        public IEnumerable<Card> GetAllCards()
+        public virtual IEnumerable<Card> GetAllCards()
         {
             using (var context = new DashboardContext(new DbContextOptions<DashboardContext>()))
             {
@@ -16,7 +16,7 @@ namespace KanbanBoard.Models
             }
         }
 
-        public void AddCard(Card card)
+        public virtual void AddCard(Card card)
         {
             using (var context = new DashboardContext(new DbContextOptions<DashboardContext>()))
             {
@@ -27,7 +27,7 @@ namespace KanbanBoard.Models
             }
         }
 
-        public Card UpdateCard(Card uCard)
+        public virtual Card UpdateCard(Card uCard)
         {
             using (var context = new DashboardContext(new DbContextOptions<DashboardContext>()))
             {
@@ -44,7 +44,7 @@ namespace KanbanBoard.Models
             }
         }
 
-        public Card ChangeStatusCard(Guid id)
+        public virtual Card ChangeStatusCard(Guid id)
         {
             using (var context = new DashboardContext(new DbContextOptions<DashboardContext>()))
             {
@@ -60,7 +60,7 @@ namespace KanbanBoard.Models
             }
         }
 
-        public Card DeleteCard(Guid id)
+        public virtual Card DeleteCard(Guid id)
         {
             using (var context = new DashboardContext(new DbContextOptions<DashboardContext>()))
             {
